@@ -29,7 +29,7 @@ class CommandMGMT:
             ]
             return tabulate.tabulate(commands, headers=header)
         elif args[0] == 'add_vnc':
-            return self.add_vnc_callback(args[1], args[2], args[3])
+            return self.add_vnc_callback(args[1], args[2], args[3], args[4])
         elif args[0] == 'stop_vnc':
             return self.stop_vnc_callback(args[1])
         elif args[0] == 'start_vnc':
