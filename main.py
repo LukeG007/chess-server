@@ -16,7 +16,7 @@ def add_vnc_callback(name, novnc_port, vnc_port, password):
     vnc_list_f = open('vnc_list.json', 'w')
     plaintext_pass = base64.b64decode(password.encode()).decode('utf-8')
     name = base64.b64decode(name.encode()).decode('utf-8')
-    os.system('echo "{}" | vncpasswd -f > password_files/passwd{}'.format(password.replace('"', '\\"'), vnc_port))
+    os.system('echo "{}" | vncpasswd -f > password_files/passwd{}'.format(plaintext_pass.replace('"', '\\"'), vnc_port))
     vnc_list[vnc_port] = {
         'name': name,
         'novnc_port': novnc_port,
