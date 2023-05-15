@@ -32,7 +32,7 @@ class ProcessMGMT:
             env = os.environ.copy()
             env['DISPLAY'] = ':' + vnc_port
             time.sleep(0.05)
-            chromium_process = subprocess.Popen(['chromium', '--kiosk', 'https://chess.com'], env=env)
+            chromium_process = subprocess.Popen(['chromium', '--profile-directory={}'.format(vnc_port), '--kiosk', 'https://chess.com'], env=env)
             self.vnc_process_list[vnc_port] = [
                 novnc_process,
                 vnc_process,
