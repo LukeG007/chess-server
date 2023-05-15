@@ -22,7 +22,7 @@ def add_vnc_callback(name, novnc_port, vnc_port, password):
         'novnc_port': novnc_port,
         'password_file': 'password_files/passwd{}'.format(vnc_port)
     }
-    vnc_list_f.write(json.dumps(vnc_list), indent=4)
+    vnc_list_f.write(json.dumps(vnc_list, indent=4))
     vnc_list_f.close()
     proc.vnc_list = vnc_list
     proc.start_vnc(vnc_port)
