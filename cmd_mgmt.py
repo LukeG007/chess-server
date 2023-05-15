@@ -8,6 +8,9 @@ class CommandMGMT:
         self.socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         self.add_vnc_callback = lambda novnc_port, vnc_port, password: None
         self.restart_vnc_callback = lambda vnc_port: None
+        self.start_vnc_callback = lambda vnc_port: None
+        self.stop_vnc_callback = lambda vnc_port: None
+        self.list_vnc_callback = lambda: None
     def process_cmd(self, command):
         if command == '':
             return None
@@ -18,12 +21,21 @@ class CommandMGMT:
             header = ['Syntax', 'Description']
             commands = [
                 ['echo <anything after>', 'Repeats command back'],
-                ['add_vnc <novnc port> <vnc port> <b64 encoded password>', 'Adds a vnc server'],
-                ['restart_vnc <vnc port>', 'Restart VNC server']
+                ['add_vnc <b64 encoded name> <novnc port> <vnc port> <b64 encoded password>', 'Adds a VNC server'],
+                ['start_vnc <vnc port>', 'Starts a VNC server'],
+                ['stop_vnc <vnc port>', 'Stops a VNC server'],
+                ['list_vncs', 'List all VNC servers'],
+                ['restart_vnc <vnc port>', 'Restarts a VNC server']
             ]
             return tabulate.tabulate(commands, headers=header)
         elif args[0] == 'add_vnc':
             return self.add_vnc_callback(args[1], args[2], args[3])
+        elif args[0] == 'stop_vnc':
+            return self.stop_vnc_callback(args[1])
+        elif args[0] == 'start_vnc':
+            return self.start_vnc_callback(args[1])
+        elif args[0] == 'list_vncs':
+            return self.list_vnc_callback()
         elif args[0] == 'restart_vnc':
             return self.restart_vnc(args[1])
         else:
