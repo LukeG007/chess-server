@@ -37,7 +37,7 @@ class CommandMGMT:
         elif args[0] == 'list_vncs':
             return self.list_vnc_callback()
         elif args[0] == 'restart_vnc':
-            return self.restart_vnc(args[1])
+            return self.restart_vnc_callback(args[1])
         else:
             return 'Invalid Command'
     def handle_client(self, conn):
